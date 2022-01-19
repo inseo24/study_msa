@@ -11,7 +11,7 @@ import java.util.List;
 public class UserDto {
     private String email;
     private String name;
-    private String password;
+    private String pwd;
     private String userId;
     private Date createdAt;
 

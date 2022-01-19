@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
         ModelMapper mapper = new ModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         UserEntity userEntity = mapper.map(userDto, UserEntity.class);
-        userEntity.setEncryptedPwd(passwordEncoder.encode(userDto.getPassword()));
+        userEntity.setEncryptedPwd(passwordEncoder.encode(userDto.getPwd()));
 
         userRepository.save(userEntity);
 
@@ -83,7 +83,10 @@ public class UserServiceImpl implements UserService {
         if (userEntity == null)
             throw new UsernameNotFoundException(email);
 
-        UserDto userDto = new ModelMapper().map(userEntity, UserDto.class);
+        ModelMapper mapper = new ModelMapper();
+        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+
+        UserDto userDto = mapper.map(userEntity, UserDto.class);
         return userDto;
     }
 }

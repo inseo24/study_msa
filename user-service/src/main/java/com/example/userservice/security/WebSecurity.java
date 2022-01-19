@@ -27,8 +27,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
 //        http.authorizeRequests().antMatchers("/users/**").permitAll();
+        http.authorizeRequests().antMatchers("/actuator/**").permitAll();
         http.authorizeRequests().antMatchers("/**")
-                        .hasIpAddress("192.168.35.95")
+                        .hasIpAddress("192.168.35.18")
                         .and()
                         .addFilter(getAuthenticationFilter());
 
@@ -39,9 +40,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     private AuthenticationFilter getAuthenticationFilter() throws Exception {
         AuthenticationFilter authenticationFilter =
                 new AuthenticationFilter(authenticationManager(), userService, env);
-//        authenticationFilter.setAuthenticationManager(authenticationManager());
         return authenticationFilter;
     }
+
 
     // select pwd from user where email=?
     // db_pwd(encrypted) == input_pwd(encrypted)
