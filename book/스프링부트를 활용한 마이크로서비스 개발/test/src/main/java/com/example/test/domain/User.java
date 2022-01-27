@@ -7,14 +7,13 @@ import lombok.ToString;
 
 @RequiredArgsConstructor
 @Getter
-@ToString
 @EqualsAndHashCode
-public final class Multiplication {
+@ToString
+public final class User {
 
-    private final int factorA;
-    private final int factorB;
+    private final String alias;
 
-    Multiplication() {
-        this(0,0);
+    protected User() {
+        alias = null;
     }
 }

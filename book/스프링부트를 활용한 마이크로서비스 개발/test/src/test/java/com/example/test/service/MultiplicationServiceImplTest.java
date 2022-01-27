@@ -1,6 +1,8 @@
 package com.example.test.service;
 
 import com.example.test.domain.Multiplication;
+import com.example.test.domain.MultiplicationResultAttempt;
+import com.example.test.domain.User;
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +38,29 @@ public class MultiplicationServiceImplTest {
 
         AssertionsForClassTypes.assertThat(multiplication.getFactorA()).isEqualTo(50);
         AssertionsForClassTypes.assertThat(multiplication.getFactorB()).isEqualTo(30);
-        AssertionsForClassTypes.assertThat(multiplication.getResult()).isEqualTo(1500);
+//        AssertionsForClassTypes.assertThat(multiplication.getResult()).isEqualTo(1500);
+    }
+
+    @Test
+    public void checkCorrectAttemptTest() {
+        Multiplication multiplication = new Multiplication(50, 60);
+        User user = new User("John");
+        MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3000);
+
+        boolean attemptResult = multiplicationServiceImpl.checkAttempt(attempt);
+
+        assertThat(attemptResult).isTrue();
+    }
+
+    @Test
+    public void checkWrongAttemptTest() {
+        Multiplication multiplication = new Multiplication(50, 60);
+        User user = new User("John");
+        MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3010);
+
+        boolean attemptResult = multiplicationServiceImpl.checkAttempt(attempt);
+
+        assertThat(attemptResult).isFalse();
     }
 
 }
