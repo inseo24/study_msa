@@ -1,7 +1,10 @@
 package com.example.kotlin.service
 
+import com.example.kotlin.domain.Multiplication
 import com.example.kotlin.domain.MultiplicationResultAttempt
+import com.example.kotlin.domain.User
 import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
@@ -41,6 +44,31 @@ class MultiplicationServiceImplTest {
         Assertions.assertThat(multiplication.result).isEqualTo(1500)
     }
 
+    @Test
+    fun checkCorrectAttemptTest() {
+        // given
+        val multiplication = Multiplication(50, 60)
+        val user = User("seoin")
+        val attempt = MultiplicationResultAttempt(user, multiplication, 3000)
 
+        // when
+        val attemptResult = multiplicationServiceImpl.checkAttempt(attempt)
 
+        // assert
+        assertThat(attemptResult).isTrue
+    }
+
+    @Test
+    fun checkWrongAttemptTest() {
+        // given
+        val multiplication = Multiplication(50, 60)
+        val user = User("seoin")
+        val attempt = MultiplicationResultAttempt(user, multiplication, 3010)
+
+        // when
+        val attemptResult = multiplicationServiceImpl.checkAttempt(attempt)
+
+        // assert
+        assertThat(attemptResult).isFalse
+    }
 }
