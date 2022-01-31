@@ -39,9 +39,9 @@ class MultiplicationServiceImplTest {
         val multiplication = multiplicationServiceImpl.createRandomMultiplication()
 
         // assert
-        Assertions.assertThat(multiplication.factorA).isEqualTo(50)
-        Assertions.assertThat(multiplication.factorB).isEqualTo(30)
-        Assertions.assertThat(multiplication.result).isEqualTo(1500)
+        assertThat(multiplication.factorA).isEqualTo(50)
+        assertThat(multiplication.factorB).isEqualTo(30)
+        assertThat(multiplication.result).isEqualTo(1500)
     }
 
     @Test

@@ -18,6 +18,7 @@ class MultiplicationServiceImpl(
     }
 
     override fun checkAttempt(resultAttempt: MultiplicationResultAttempt): Boolean {
-        return false
+        return resultAttempt.resultAttempt ==
+                resultAttempt.multiplication?.factorA!! * resultAttempt.multiplication?.factorB!!
     }
 }
