@@ -11,7 +11,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.json.JacksonTester
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.test.web.servlet.MockMvc
-import com.example.kotlin.controller.MultiplicationResultAttemptController.ResultResponse
 import com.example.kotlin.domain.User
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -39,8 +38,8 @@ class MultiplicationResultAttemptControllerTest {
         return null as T
     }
 
-    lateinit var jsonResult: JacksonTester<MultiplicationResultAttempt>
-    lateinit var jsonResponse: JacksonTester<ResultResponse>
+    lateinit var jsonResultAttempt: JacksonTester<MultiplicationResultAttempt>
+    lateinit var jsonResultAttemptList: JacksonTester<List<MultiplicationResultAttempt>>
 
     @BeforeAll
     fun setup() {
@@ -57,26 +56,49 @@ class MultiplicationResultAttemptControllerTest {
         genericParameterizedTest(false)
     }
 
-    fun genericParameterizedTest(correct: Boolean) {
+    private fun genericParameterizedTest(correct: Boolean) {
         // given
         given(multiplicationService.checkAttempt(any(MultiplicationResultAttempt::class.java)))
             .willReturn(correct)
 
         val user = User("seoin")
         val multiplication = Multiplication(50, 70)
-        val attempt = MultiplicationResultAttempt(user, multiplication, 3500)
+        val attempt = MultiplicationResultAttempt(user, multiplication, 3500, correct)
 
         // when
         val response : MockHttpServletResponse = mockMvc.perform(
             post("/results")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonResult.write(attempt).json)
+                .content(jsonResultAttempt.write(attempt).json)
         ).andReturn().response
 
         // then
         assertThat(response.status).isEqualTo(HttpStatus.OK.value())
         assertThat(response.contentAsString)
-            .isEqualTo(jsonResponse.write(ResultResponse(correct)).json)
+            .isEqualTo(jsonResultAttempt.write(MultiplicationResultAttempt(
+                attempt.user,
+                attempt.multiplication,
+                attempt.resultAttempt,
+                correct)).json)
     }
 
+    @Test
+    fun getUserStatus() {
+        // given
+        val user = User("seoin")
+        val multiplication = Multiplication(50, 70)
+        val attempt = MultiplicationResultAttempt(user, multiplication, 3500, true)
+        val recentAttempts = listOf(attempt, attempt)
+        given(multiplicationService.getStatsForUser("seoin")).willReturn(recentAttempts)
+
+        // when
+        val response : MockHttpServletResponse = mockMvc.perform(
+            get("/results")
+                .param("alias", "seoin")
+        ).andReturn().response
+
+        // then
+        assertThat(response.status).isEqualTo(HttpStatus.OK.value())
+        assertThat(response.contentAsString).isEqualTo(jsonResultAttemptList.write(recentAttempts).json)
+    }
 }

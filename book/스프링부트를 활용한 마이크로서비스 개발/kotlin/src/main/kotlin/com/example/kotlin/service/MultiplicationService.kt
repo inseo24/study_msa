@@ -17,4 +17,5 @@ interface MultiplicationService {
     * @return 곱셈 계산 결과가 맞으면 true, 아니면 false
     * */
     fun checkAttempt(resultAttempt: MultiplicationResultAttempt): Boolean
+    fun getStatsForUser(userAlias: String): List<MultiplicationResultAttempt>
 }
