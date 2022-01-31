@@ -3,7 +3,6 @@ package com.example.kotlin.service
 import com.example.kotlin.domain.Multiplication
 import com.example.kotlin.domain.MultiplicationResultAttempt
 import com.example.kotlin.domain.User
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
