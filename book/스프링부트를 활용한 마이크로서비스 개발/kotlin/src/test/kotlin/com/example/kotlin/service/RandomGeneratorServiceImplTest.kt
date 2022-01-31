@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
 class RandomGeneratorServiceImplTest(
-    val randomGeneratorServiceImpl: RandomGeneratorServiceImpl
+    private val randomGeneratorServiceImpl: RandomGeneratorServiceImpl
 ) {
 
     @Test
