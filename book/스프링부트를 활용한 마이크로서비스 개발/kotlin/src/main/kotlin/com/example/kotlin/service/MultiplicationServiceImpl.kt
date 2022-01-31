@@ -1,6 +1,7 @@
 package com.example.kotlin.service
 
 import com.example.kotlin.domain.Multiplication
+import com.example.kotlin.domain.MultiplicationResultAttempt
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -14,5 +15,9 @@ class MultiplicationServiceImpl(
         val factorA: Int = randomGeneratorService.generateRandomFactor()
         val factorB: Int = randomGeneratorService.generateRandomFactor()
         return Multiplication(factorA, factorB)
+    }
+
+    override fun checkAttempt(resultAttempt: MultiplicationResultAttempt): Boolean {
+        return false
     }
 }

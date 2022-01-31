@@ -1,5 +1,6 @@
 package com.example.kotlin.service
 
+import com.example.kotlin.domain.MultiplicationResultAttempt
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
@@ -39,5 +40,7 @@ class MultiplicationServiceImplTest {
         Assertions.assertThat(multiplication.factorB).isEqualTo(30)
         Assertions.assertThat(multiplication.result).isEqualTo(1500)
     }
+
+
 
 }
