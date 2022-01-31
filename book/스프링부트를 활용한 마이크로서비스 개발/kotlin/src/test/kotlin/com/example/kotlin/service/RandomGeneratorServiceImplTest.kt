@@ -1,12 +1,11 @@
 package com.example.kotlin.service
 
-import org.aspectj.lang.annotation.Before
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
 class RandomGeneratorServiceImplTest{
 
-    private val randomGeneratorServiceImpl: RandomGeneratorServiceImpl = RandomGeneratorServiceImpl()
+    private val randomGeneratorServiceImpl = RandomGeneratorServiceImpl()
 
     @Test
     fun generateRandomFactorIsBetweenExpectedLimits() {

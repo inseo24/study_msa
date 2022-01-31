@@ -21,7 +21,7 @@ class RandomGeneratorServiceTest {
         // 적당히 어려운 계산을 만들기 위해
         // 생성한 인수가 11~99 범위에 있는지 확인
         val range : List<Int> = (11 until 100).toList()
-        assertThat(randomFactors).containsOnlyOnceElementsOf(range)
+        assertThat(randomFactors).containsOnlyElementsOf(range)
     }
 
 }
