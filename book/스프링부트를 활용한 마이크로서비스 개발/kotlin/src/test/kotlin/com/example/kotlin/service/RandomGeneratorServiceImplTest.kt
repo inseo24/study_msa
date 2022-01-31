@@ -1,11 +1,12 @@
 package com.example.kotlin.service
 
+import org.aspectj.lang.annotation.Before
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
-class RandomGeneratorServiceImplTest(
-    private val randomGeneratorServiceImpl: RandomGeneratorServiceImpl
-) {
+class RandomGeneratorServiceImplTest{
+
+    private val randomGeneratorServiceImpl: RandomGeneratorServiceImpl = RandomGeneratorServiceImpl()
 
     @Test
     fun generateRandomFactorIsBetweenExpectedLimits() {
@@ -17,7 +18,7 @@ class RandomGeneratorServiceImplTest(
         // 적당히 어려운 계산을 만들기 위해
         // 생성한 인수가 11~99 범위에 있는지 확인
         val range : List<Int> = (11 until 100).toList()
-        Assertions.assertThat(randomFactors).containsOnlyOnceElementsOf(range)
+        Assertions.assertThat(randomFactors).containsOnlyElementsOf(range)
     }
 
 }
