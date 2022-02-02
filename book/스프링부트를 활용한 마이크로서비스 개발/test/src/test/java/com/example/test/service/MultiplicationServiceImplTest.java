@@ -37,9 +37,9 @@ public class MultiplicationServiceImplTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        multiplicationServiceImpl = new MultiplicationServiceImpl(randomGeneratorService
-        , userRepository, attemptRepository);
+//        MockitoAnnotations.initMocks(this);
+//        multiplicationServiceImpl = new MultiplicationServiceImpl(randomGeneratorService
+//        , userRepository, attemptRepository);
     }
 
     @Test
