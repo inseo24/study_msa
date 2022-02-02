@@ -9,8 +9,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ScoreCardRepository extends CrudRepository<ScoreCard, Long> {
-    /*
-    * scorecard의 점수를 합해 사용자의 총 점수를 조회
+    /**
+    * scoreCard 의 점수를 합해 사용자의 총 점수를 조회
     * @param userId 총 점수를 조회하고자 하는 사용자의 id
     * @return 사용자의 총 점수
     * */
@@ -19,7 +19,7 @@ public interface ScoreCardRepository extends CrudRepository<ScoreCard, Long> {
             "WHERE s.userId = :userId GROUP BY s.userId")
     int getTotalScoreForUser(@Param("userId") final Long userId);
 
-    /*
+    /**
     * 사용자와 사용자의 총 점수를 나타내는 {@link LeaderBoardRow} 리스트를 조회
     * @return 높은 점수 순으로 정렬된 리더보드
     * */
@@ -28,7 +28,7 @@ public interface ScoreCardRepository extends CrudRepository<ScoreCard, Long> {
     + "GROUP BY s.userId ORDER BY SUM(s.score) DESC")
     List<LeaderBoardRow> findFirst10();
 
-    /*
+    /**
     * 사용자의 모든 ScoreCard를 조회
     * @param userId 사용자 id
     * @return 특정 사용자의 최근순으로 정렬된 ScoreCard 리스트

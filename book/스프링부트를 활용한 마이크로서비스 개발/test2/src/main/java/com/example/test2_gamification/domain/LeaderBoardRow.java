@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
-/*
+/**
 * 리더보드 내 위치를 나타내는 객체
 * 사용자와 전체 점수를 연결
 * */

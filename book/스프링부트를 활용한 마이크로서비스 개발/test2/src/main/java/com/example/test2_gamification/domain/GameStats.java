@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/*
+/**
 * 한 번 혹은 여러 번의 게임 결과를 포함하는 객체
 * {@link ScoreCard} 객체와 {@link BadgeCard}로 이뤄짐
 *
@@ -31,7 +31,7 @@ public final class GameStats {
         this.badges = new ArrayList<>();
     }
 
-    /*
+    /**
     * 빈 인스턴스(0점과 배지 없는 상태)를 만들기 위한 팩토리 메서드
     * @param userId 사용자 id
     * @return {@link GameStats} 객체(0점과 배지 없는 상태)
@@ -40,7 +40,7 @@ public final class GameStats {
         return new GameStats(userId, 0, Collections.emptyList());
     }
 
-    /*
+    /**
     * @return 수정 불가능한 배지 카드 리스트의 뷰
     * */
     public List<Badge> getBadges() {
