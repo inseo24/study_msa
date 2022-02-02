@@ -3,6 +3,8 @@ package com.example.test.service;
 import com.example.test.domain.Multiplication;
 import com.example.test.domain.MultiplicationResultAttempt;
 import com.example.test.domain.User;
+import com.example.test.multiplication.EventDispatcher;
+import com.example.test.multiplication.MultiplicationSolvedEvent;
 import com.example.test.repository.MultiplicationResultAttemptRepository;
 import com.example.test.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,18 +15,21 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 public class MultiplicationServiceImpl implements MultiplicationService{
 
     private RandomGeneratorService randomGeneratorService;
     private UserRepository userRepository;
     private MultiplicationResultAttemptRepository multiplicationResultAttemptRepository;
+    private EventDispatcher eventDispatcher;
 
     @Autowired
-    public MultiplicationServiceImpl(RandomGeneratorService randomGeneratorService, UserRepository userRepository, MultiplicationResultAttemptRepository multiplicationResultAttemptRepository) {
+    public MultiplicationServiceImpl(com.example.test.service.RandomGeneratorService randomGeneratorService, UserRepository userRepository, MultiplicationResultAttemptRepository multiplicationResultAttemptRepository, EventDispatcher eventDispatcher) {
         this.randomGeneratorService = randomGeneratorService;
         this.userRepository = userRepository;
         this.multiplicationResultAttemptRepository = multiplicationResultAttemptRepository;
+        this.eventDispatcher = eventDispatcher;
     }
 
     @Override
@@ -61,6 +66,12 @@ public class MultiplicationServiceImpl implements MultiplicationService{
                 resultAttempt.getResultAttempt(), isCorrect);
 
         multiplicationResultAttemptRepository.save(checkedAttempt);
+
+        eventDispatcher.send(new MultiplicationSolvedEvent(
+                checkedAttempt.getId(),
+                checkedAttempt.getUser().getId(),
+                checkedAttempt.isCorrect()
+        ));
 
         return isCorrect;
     }
