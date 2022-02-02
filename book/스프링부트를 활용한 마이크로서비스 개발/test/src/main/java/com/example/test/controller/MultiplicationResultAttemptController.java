@@ -22,6 +22,13 @@ final class MultiplicationResultAttemptController {
         this.multiplicationService = multiplicationService;
     }
 
+    @GetMapping("/{resultId}")
+    ResponseEntity<MultiplicationResultAttempt> getResultById(final @PathVariable("resultId") Long resultId){
+        return ResponseEntity.ok(
+                multiplicationService.getResultById(resultId)
+        );
+    }
+
     @PostMapping
     ResponseEntity<MultiplicationResultAttempt> postResult(@RequestBody MultiplicationResultAttempt multiplicationResultAttempt){
         boolean isCorrect = multiplicationService.checkAttempt(multiplicationResultAttempt);

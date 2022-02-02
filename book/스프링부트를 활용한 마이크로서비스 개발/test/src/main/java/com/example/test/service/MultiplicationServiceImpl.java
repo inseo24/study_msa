@@ -75,4 +75,9 @@ public class MultiplicationServiceImpl implements MultiplicationService{
 
         return isCorrect;
     }
+
+    @Override
+    public MultiplicationResultAttempt getResultById(Long resultId) {
+        return multiplicationResultAttemptRepository.findById(resultId).orElseThrow();
+    }
 }
