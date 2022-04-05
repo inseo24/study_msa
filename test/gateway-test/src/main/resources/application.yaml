@@ -41,4 +41,4 @@ spring:
 
 # http://172.16.20.92:8000/first-service/hello -> [GET] gateway 통해서 first-service 로 연결됨
 # http://172.16.20.92:8000/first-service/post -> [POST] 동문
-# http://172.16.20.92:8000/first-service/** -> [GET] 만 되야 함
+# http://172.16.20.92:8000/first-service/** -> [GET] 만 되야 함, 위처럼 주석 처리하면 모든 method 허용됨
