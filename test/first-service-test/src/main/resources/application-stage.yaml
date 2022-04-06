@@ -2,7 +2,7 @@ spring:
   application:
     name: first-service
   config:
-    import: optional:configserver:http://localhost:8888
+    import: optional:configserver:http://localhost:10000
 
 management:
   endpoints:
