@@ -9,8 +9,7 @@ spring:
       server:
         git:
           uri: https://github.com/inseo24/config_test_repository.git
-          username: inseo24
-          password: secret
+          # 공개 레포라 비밀번호 필요 없는 듯. ㅋ.ㅋ
 
 management:
   endpoints:
