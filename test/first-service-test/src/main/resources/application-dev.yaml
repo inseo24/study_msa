@@ -1,13 +1,8 @@
 spring:
-  application:
-    name: first-service
   config:
     import: optional:configserver:http://localhost:8000
 
 management:
-  endpoints:
-    web:
-      exposure:
-        include: health
-      base-path: /
-      path-mapping.health: health
+  endpoint:
+    info:
+      enabled: false # 여기서 false 처리하면 localhost:8080/info-test 는 404

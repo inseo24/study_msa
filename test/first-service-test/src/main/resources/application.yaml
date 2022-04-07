@@ -1,15 +1,19 @@
 spring:
   application:
     name: first-service
+# application name 대로 config server 에서 repo 뒤질 때 참고해서 가져옴. dev, stage, prod 에서 다르게 설정해도 바뀌지 않는 것 같다.(나름 테스트 해 본 결과)
   config:
     import: optional:configserver:http://localhost:8888
   profiles:
     active: local
 
+# management 기본 yaml 에서 설정하면 이대로 dev, stage, prod 에도 적용됨
+# env 별로 disable 하면 막힘 ㅇㅅㅇ!
 management:
   endpoints:
     web:
       exposure:
-        include: health
+        include: health, info
       base-path: /
-      path-mapping.health: health
+      path-mapping.health: health-check # localhost:8080/health-check
+      path-mapping.info: info-test # localhost:8080/info-test

@@ -3,11 +3,3 @@ spring:
     name: first-service
   config:
     import: optional:configserver:http://localhost:9000
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health
-      base-path: /
-      path-mapping.health: health
