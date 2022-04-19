@@ -1,14 +1,17 @@
 spring:
   application:
-    name: first-service
-# application name 대로 config server 에서 repo 뒤질 때 참고해서 가져옴. dev, stage, prod 에서 다르게 설정해도 바뀌지 않는 것 같다.(나름 테스트 해 본 결과)
-  config:
-    import: optional:configserver:http://localhost:8888
-  profiles:
-    active: local
+    name: test-first-service
 
+  cloud:
+    config:
+      name: test-first-service
+# application name 대로 config server 에서 repo 뒤질 때 참고해서 가져옴. dev, stage, prod 에서 다르게 설정해도 바뀌지 않는 것 같다.(나름 테스트 해 본 결과)
+# bootstrap을 쓰면 config name을 덮어쓰기 하는 거 같은데 안 그러면 application-name 따라가는 대환장
 # management 기본 yaml 에서 설정하면 이대로 dev, stage, prod 에도 적용됨
 # env 별로 disable 하면 막힘 ㅇㅅㅇ!
+
+# config client 에서 fetch 하는게 /[spring.application.name]/[spring.profiles/active] 인 것 같다.
+# label 설정하고 뭐하고 별 짓 다해 봤는데 bootstrap 없이 하려면 그냥 application.name 따라가게 해야할듯
 management:
   endpoints:
     web:

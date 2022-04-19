@@ -1,6 +1,7 @@
 spring:
   config:
     import: optional:configserver:http://localhost:8000
+    name: test-first-service
 
 management:
   endpoint:
